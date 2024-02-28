@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Blooms Flower Shop</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #0a0a0a;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .flower-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(10, 10, 10, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #cart {
+            flex-basis: 300px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(11, 11, 11, 0.1);
+        }
+
+        footer {
+            background-color: #090808;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Beautiful Blooms Flower Shop</h1>
+    </header>
+
+    <div class="container" id="flower-section">
+        <!-- Flower cards will be dynamically added here -->
+    </div>
+
+    <div id="cart">
+        <h2>Shopping Cart</h2>
+        <ul id="cart-items"></ul>
+        <p>Total Price: $<span id="total-price">0.00</span></p>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Beautiful Blooms Flower Shop</p>
+    </footer>
+
+    <script>
+        // Flower data
+        const flowers = [
+            { name: 'Rose', description: 'Symbol of love and beauty.', price: 10.99, image: 'rose.jp' },
+            { name: 'Lily', description: 'Represents purity and refined beauty.', price: 12.99, image: 'lily.jpg' },
+            // Add more flowers as needed
+        ];
+
+        // Function to display flowers
+        function displayFlowers() {
+            const flowerSection = document.getElementById('flower-section');
+
+            flowers.forEach(flower => {
+                const flowerCard = document.createElement('div');
+                flowerCard.className = 'flower-card';
+
+                const image = document.createElement('img');
+                image.src = "https://img.freepik.com/free-photo/top-view-roses-flowers_23-2148860041.jpg?w=740&t=st=1705418174~exp=1705418774~hmac=f816594e54ee1e1acf7faf38492e85b55ecac75d4046e60d76e2926a58339557";
+                image.alt = flower.name;
+
+                const title = document.createElement('h2');
+                title.textContent = flower.name;
+
+                const description = document.createElement('p');
+                description.textContent = flower.description;
+
+                const price = document.createElement('p');
+                price.textContent = `$${flower.price.toFixed(2)}`;
+
+                const addToCartButton = document.createElement('button');
+                addToCartButton.textContent = 'Add to Cart';
+                addToCartButton.addEventListener('click', () => addToCart(flower));
+
+                flowerCard.appendChild(image);
+                flowerCard.appendChild(title);
+                flowerCard.appendChild(description);
+                flowerCard.appendChild(price);
+                flowerCard.appendChild(addToCartButton);
+
+                flowerSection.appendChild(flowerCard);
+            });
+        }
+
+        // Function to add a flower to the cart
+        function addToCart(flower) {
+            const cartItems = document.getElementById('cart-items');
+            const totalDisplay = document.getElementById('total-price');
+
+            const cartItem = document.createElement('li');
+            cartItem.textContent = `${flower.name} - $${flower.price.toFixed(2)}`;
+
+            cartItems.appendChild(cartItem);
+
+            // Calculate total price
+            let totalPrice = parseFloat(totalDisplay.textContent);
+            totalPrice += flower.price;
+            totalDisplay.textContent = totalPrice.toFixed(2);
+        }
+
+        // Initial display
+        displayFlowers();
+    </script>
+</body>
+
+</html>
+
+
